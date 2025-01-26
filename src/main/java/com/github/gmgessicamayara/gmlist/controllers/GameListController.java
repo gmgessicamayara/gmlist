@@ -1,6 +1,5 @@
 package com.github.gmgessicamayara.gmlist.controllers;
 
-import com.github.gmgessicamayara.gmlist.dto.GameDTO;
 import com.github.gmgessicamayara.gmlist.dto.GameListDTO;
 import com.github.gmgessicamayara.gmlist.dto.GameMinDTO;
 import com.github.gmgessicamayara.gmlist.services.GameListService;
@@ -20,10 +19,20 @@ public class GameListController {
     @Autowired
     private GameListService gameListService;
 
+    @Autowired
+    private GameService gameService;
+
     @GetMapping
     public List<GameListDTO> findAll(){
         return gameListService.findAll();
     }
+
+    @GetMapping(value = "/{listId}/games")
+    public List<GameMinDTO> findByListId(@PathVariable Long listId){
+        return gameService.searchByList(listId);
+    }
+
+
 
 
 }

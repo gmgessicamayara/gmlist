@@ -3,6 +3,7 @@ package com.github.gmgessicamayara.gmlist.services;
 import com.github.gmgessicamayara.gmlist.dto.GameDTO;
 import com.github.gmgessicamayara.gmlist.dto.GameMinDTO;
 import com.github.gmgessicamayara.gmlist.entities.Game;
+import com.github.gmgessicamayara.gmlist.projections.GameMinProjection;
 import com.github.gmgessicamayara.gmlist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GameService {
     @Transactional(readOnly = true)
     public List<GameMinDTO> findAll(){
         List<Game> result =  gameRepository.findAll();
-        return result.stream().map(item -> new GameMinDTO(item)).toList();
+        return result.stream().map(GameMinDTO::new).toList();
     }
 
     @Transactional(readOnly = true)
@@ -28,4 +29,9 @@ public class GameService {
         return new GameDTO(result);
     }
 
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> searchByList(Long id){
+        List<GameMinProjection> result =  gameRepository.searchByList(id);
+        return result.stream().map(GameMinDTO::new).toList();
+    }
 }

@@ -1,6 +1,7 @@
 package com.github.gmgessicamayara.gmlist.dto;
 
 import com.github.gmgessicamayara.gmlist.entities.Game;
+import com.github.gmgessicamayara.gmlist.projections.GameMinProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,14 @@ public class GameMinDTO {
         year = game.getYear();
         imgUrl = game.getImgUrl();
         shortDescription = game.getShortDescription();
-
     }
+
+    public GameMinDTO(GameMinProjection gameProjection) {
+        id = gameProjection.getId();
+        title = gameProjection.getTitle();
+        year = gameProjection.getYear();
+        imgUrl = gameProjection.getImgUrl();
+        shortDescription = gameProjection.getShortDescription();
+    }
+
 }

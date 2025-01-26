@@ -1,6 +1,5 @@
 package com.github.gmgessicamayara.gmlist.dto;
 
-import com.github.gmgessicamayara.gmlist.entities.Game;
 import com.github.gmgessicamayara.gmlist.entities.GameList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
