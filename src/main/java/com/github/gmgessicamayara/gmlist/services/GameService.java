@@ -5,11 +5,13 @@ import com.github.gmgessicamayara.gmlist.dto.GameMinDTO;
 import com.github.gmgessicamayara.gmlist.entities.Game;
 import com.github.gmgessicamayara.gmlist.projections.GameMinProjection;
 import com.github.gmgessicamayara.gmlist.repositories.GameRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameService {
@@ -25,8 +27,9 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id){
-        Game result =  gameRepository.findById(id).get();
-        return new GameDTO(result);
+        return gameRepository.findById(id)
+                .map(GameDTO::new)
+                .orElseThrow(() -> new EntityNotFoundException("Game not found with id: " + id));
     }
 
     @Transactional(readOnly = true)
